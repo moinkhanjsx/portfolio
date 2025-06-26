@@ -110,7 +110,7 @@ function App() {
     { name: 'JavaScript', level: 92, icon: '📝', color: 'from-yellow-400 to-orange-500' },
     { name: 'TypeScript', level: 88, icon: '🔷', color: 'from-blue-500 to-indigo-600' },
     { name: 'Node.js', level: 85, icon: '🟢', color: 'from-green-400 to-green-600' },
-    { name: 'Python', level: 80, icon: '🐍', color: 'from-blue-400 to-yellow-500' },
+    { name: 'HTML', level: 95, icon: '🌐', color: 'from-orange-400 to-red-500' },
     { name: 'CSS/SCSS', level: 90, icon: '🎨', color: 'from-pink-400 to-purple-600' }
   ]
 
@@ -654,7 +654,7 @@ function App() {
               <div className={`p-6 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                 <h4 className="text-xl font-bold mb-3 text-cyan-400">Backend Mastery</h4>
                 <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Node.js, Python, Express, FastAPI, MongoDB, PostgreSQL
+                  Node.js, Express, REST APIs, MongoDB, PostgreSQL, MySQL
                 </p>
               </div>
               
