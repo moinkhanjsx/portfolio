@@ -9,6 +9,21 @@
   animation: float 3s ease-in-out infinite;
 }
 
+/* Skills section enhancements */
+@keyframes skillGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(139, 92, 246, 0.3); }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  100% { width: var(--target-width); }
+}
+
+.skill-card:hover {
+  animation: skillGlow 2s ease-in-out infinite;
+}
+
 /* Smooth scrolling fixes - minimal approach */
 html {
   scroll-behavior: smooth;

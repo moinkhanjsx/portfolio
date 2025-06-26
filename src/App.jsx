@@ -672,28 +672,103 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
-        <div className="max-w-7xl mx-auto">
-          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
-            Skills & Expertise
-          </h2>
+      <section id="skills" className="py-24 px-4 sm:px-6 relative overflow-hidden" data-aos="fade-up">
+        {/* Enhanced Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute top-20 left-10 w-32 h-32 ${isDarkMode ? 'bg-purple-500/10' : 'bg-purple-300/20'} rounded-full blur-3xl animate-pulse`}></div>
+          <div className={`absolute bottom-20 right-10 w-40 h-40 ${isDarkMode ? 'bg-cyan-500/10' : 'bg-cyan-300/20'} rounded-full blur-3xl animate-pulse`} style={{ animationDelay: '1s' }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-20">
+            <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+              Skills & Expertise
+            </h2>
+            <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
+              Mastering the art of modern web development with cutting-edge technologies
+            </p>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Enhanced Skills Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
-              <div key={skill.name} className={`${isDarkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'} backdrop-blur-sm rounded-xl p-6 border hover:scale-105 transition-all duration-300`} data-aos="fade-up" data-aos-delay={index * 100}>
-                <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-3">{skill.icon}</span>
-                  <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{skill.name}</h3>
+              <div 
+                key={skill.name} 
+                className={`group relative ${isDarkMode ? 'bg-gray-800/30' : 'bg-white/60'} backdrop-blur-lg rounded-2xl p-6 border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'} hover:scale-105 hover:rotate-1 transition-all duration-500 hover:shadow-2xl ${isDarkMode ? 'hover:shadow-purple-500/25' : 'hover:shadow-purple-300/25'}`}
+                data-aos="fade-up" 
+                data-aos-delay={index * 150}
+              >
+                {/* Skill Icon with Enhanced Animation */}
+                <div className="relative mb-6">
+                  <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} rounded-xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300`}></div>
+                  <div className={`relative w-16 h-16 bg-gradient-to-r ${skill.color} rounded-xl flex items-center justify-center text-2xl transform group-hover:scale-110 transition-transform duration-300`}>
+                    {skill.icon}
+                  </div>
                 </div>
-                <div className={`w-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} rounded-full h-3 mb-2`}>
-                  <div 
-                    className={`bg-gradient-to-r ${skill.color} h-3 rounded-full transition-all duration-1000`}
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
+
+                {/* Skill Name */}
+                <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'} group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:${skill.color} group-hover:bg-clip-text transition-all duration-300`}>
+                  {skill.name}
+                </h3>
+
+                {/* Enhanced Progress Bar */}
+                <div className="relative mb-3">
+                  <div className={`w-full h-2 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} rounded-full overflow-hidden`}>
+                    <div 
+                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full relative transition-all duration-1000 ease-out`}
+                      style={{ width: `${skill.level}%` }}
+                    >
+                      {/* Animated shine effect */}
+                      <div className="absolute inset-0 bg-white/30 animate-pulse rounded-full"></div>
+                    </div>
+                  </div>
+                  {/* Floating percentage */}
+                  <div className={`absolute -top-8 bg-gradient-to-r ${skill.color} text-white text-xs font-bold px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0`} style={{ left: `${Math.max(0, Math.min(skill.level - 10, 85))}%` }}>
+                    {skill.level}%
+                  </div>
                 </div>
-                <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{skill.level}%</span>
+
+                {/* Skill Level with Enhanced Typography */}
+                <div className="flex justify-between items-center">
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Proficiency
+                  </span>
+                  <span className={`text-sm font-bold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    {skill.level}%
+                  </span>
+                </div>
+
+                {/* Skill Category Badge */}
+                <div className="absolute top-4 right-4">
+                  <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${skill.color} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                </div>
+
+                {/* Hover Glow Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}></div>
               </div>
             ))}
+          </div>
+
+          {/* Additional Stats Section */}
+          <div className="mt-16 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className={`${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <div className="text-3xl font-bold text-purple-500 mb-2">8+</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Technologies</div>
+              </div>
+              <div className={`${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <div className="text-3xl font-bold text-cyan-500 mb-2">5+</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Experience</div>
+              </div>
+              <div className={`${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <div className="text-3xl font-bold text-pink-500 mb-2">50+</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects Built</div>
+              </div>
+              <div className={`${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <div className="text-3xl font-bold text-orange-500 mb-2">90%+</div>
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Avg Proficiency</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
