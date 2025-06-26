@@ -8,3 +8,18 @@
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Smooth scrolling fixes - minimal approach */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix modal scroll issues only */
+.modal-open {
+  overflow: hidden !important;
+}
