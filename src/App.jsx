@@ -3,6 +3,11 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import './App.css'
 
+// Lazy load heavy components for code splitting
+const PreviewModal = lazy(() => import('./components/PreviewModal'))
+const HoverPreview = lazy(() => import('./components/HoverPreview'))
+const ProjectFilters = lazy(() => import('./components/ProjectFilters'))
+
 // Error Boundary Component
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -83,6 +88,15 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [selectedFilter, setSelectedFilter] = useState('All')
+  const [searchTerm, setSearchTerm] = useState('')
+  
+  // Enhanced filtering state
+  const [activeFilters, setActiveFilters] = useState({
+    category: 'All',
+    type: 'All',
+    complexity: 'All'
+  })
 
   // Simulate initial loading
   useEffect(() => {
@@ -201,44 +215,127 @@ function App() {
     { name: 'CSS/SCSS', level: 90, icon: '🎨', color: 'from-pink-400 to-purple-600' }
   ]
 
-  // Projects data
+  // Projects data with enhanced categorization
   const projects = [
     {
       title: 'Cool Air Repairs',
       description: 'Professional air conditioning services website with modern design, service booking, and customer contact features.',
       tags: ['React', 'Responsive Design', 'Business Website', 'Contact Forms'],
+      category: 'Business',
+      type: 'Frontend',
       liveUrl: 'https://sayyedshoaib.onrender.com',
       githubUrl: 'https://github.com/moinkhan-in/cool-air-repairs',
       featured: true,
-      previewable: true
+      previewable: true,
+      technologies: ['React', 'JavaScript', 'CSS', 'HTML'],
+      complexity: 'Intermediate'
     },
     {
       title: 'AI-Powered Portfolio',
       description: 'Advanced React portfolio with AI features, dynamic themes, and stunning animations.',
       tags: ['React', 'Tailwind CSS', 'AOS', 'Vite'],
+      category: 'Personal',
+      type: 'Frontend',
       liveUrl: 'https://portfolio-demo.com',
       githubUrl: 'https://github.com/moinkhan-in/portfolio',
       featured: true,
-      previewable: false // This would be this current site
+      previewable: false,
+      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
+      complexity: 'Advanced'
     },
     {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with React frontend, Node.js backend, and secure payments.',
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      category: 'E-Commerce',
+      type: 'Full Stack',
       githubUrl: 'https://github.com/moinkhan-in/ecommerce',
       featured: true,
-      previewable: false // No live URL provided
+      previewable: false,
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express.js'],
+      complexity: 'Advanced'
     },
     {
       title: 'Task Management App',
       description: 'Productivity application with drag-and-drop functionality and real-time collaboration.',
       tags: ['React', 'Firebase', 'Material-UI', 'WebSocket'],
+      category: 'Productivity',
+      type: 'Full Stack',
       liveUrl: 'https://taskflow-pro.netlify.app/',
       githubUrl: 'https://github.com/moinkhan-in/task-manager',
       featured: true,
-      previewable: true
+      previewable: true,
+      technologies: ['React', 'Firebase', 'JavaScript', 'WebSocket'],
+      complexity: 'Intermediate'
+    },
+    {
+      title: 'Weather Dashboard',
+      description: 'Real-time weather application with location-based forecasts and interactive maps.',
+      tags: ['React', 'Weather API', 'Charts', 'Geolocation'],
+      category: 'Utility',
+      type: 'Frontend',
+      githubUrl: 'https://github.com/moinkhan-in/weather-app',
+      featured: false,
+      previewable: false,
+      technologies: ['React', 'JavaScript', 'APIs', 'CSS'],
+      complexity: 'Beginner'
+    },
+    {
+      title: 'Blog CMS',
+      description: 'Content management system for blogs with markdown support and admin dashboard.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Admin Panel'],
+      category: 'CMS',
+      type: 'Full Stack',
+      githubUrl: 'https://github.com/moinkhan-in/blog-cms',
+      featured: false,
+      previewable: false,
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express.js'],
+      complexity: 'Advanced'
     }
   ]
+
+  // Get unique filter categories
+  const filterCategories = useMemo(() => {
+    const categories = ['All', ...new Set(projects.map(project => project.category))]
+    const types = ['All', ...new Set(projects.map(project => project.type))]
+    const complexities = ['All', ...new Set(projects.map(project => project.complexity))]
+    return { categories, types, complexities }
+  }, [projects])
+
+  // Filter handling functions
+  const handleFilterChange = useCallback((filterType, value) => {
+    setActiveFilters(prev => ({
+      ...prev,
+      [filterType]: value
+    }))
+  }, [])
+
+  const handleSearchChange = useCallback((value) => {
+    setSearchTerm(value)
+  }, [])
+
+  // Filtered projects based on active filters and search
+  const filteredProjects = useMemo(() => {
+    return projects.filter(project => {
+      // Category filter
+      const matchesCategory = activeFilters.category === 'All' || project.category === activeFilters.category
+      
+      // Type filter
+      const matchesType = activeFilters.type === 'All' || project.type === activeFilters.type
+      
+      // Complexity filter
+      const matchesComplexity = activeFilters.complexity === 'All' || project.complexity === activeFilters.complexity
+      
+      // Search filter
+      const matchesSearch = !searchTerm || 
+        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+      
+      return matchesCategory && matchesType && matchesComplexity && matchesSearch
+    })
+  }, [projects, activeFilters, searchTerm])
 
   // Performance: Memoize expensive calculations
   const skillsWithAnimationDelay = useMemo(() => 
@@ -253,305 +350,6 @@ function App() {
     projects.filter(project => project.featured),
     [projects]
   )
-
-  // Hover Preview Component
-  const HoverPreview = ({ project, position, isDarkMode }) => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [hasError, setHasError] = useState(false)
-    const [isVisible, setIsVisible] = useState(false)
-    const [showIframe, setShowIframe] = useState(false)
-
-    // Animate appearance
-    useEffect(() => {
-      if (project && position) {
-        setIsVisible(true)
-        setIsLoading(true)
-        setHasError(false)
-        setShowIframe(false)
-        
-        // Delay iframe loading to first show project info
-        const iframeTimeout = setTimeout(() => {
-          setShowIframe(true)
-        }, 200)
-        
-        return () => clearTimeout(iframeTimeout)
-      } else {
-        setIsVisible(false)
-      }
-    }, [project, position])
-
-    if (!project || !position) return null
-
-    return (
-      <div 
-        className={`fixed z-[90] pointer-events-none transition-all duration-200 ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
-        style={{
-          left: typeof window !== 'undefined' 
-            ? (window.innerWidth < 640 
-              ? Math.max(10, Math.min(position.x - 160, window.innerWidth - 340)) 
-              : (position.x > window.innerWidth / 2 ? position.x - 340 : position.x + 20))
-            : position.x + 20,
-          top: typeof window !== 'undefined' ? Math.max(20, Math.min(position.y - 150, window.innerHeight - 280)) : position.y - 150,
-        }}
-      >
-        <div className={`w-80 sm:w-80 max-w-[90vw] h-60 ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border-2 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm`}>
-          {/* Header */}
-          <div className={`px-4 py-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-b flex items-center justify-between`}>
-            <div>
-              <h4 className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                {project.title}
-              </h4>
-              <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                Live Preview
-              </p>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>LIVE</span>
-            </div>
-          </div>
-
-          {/* Preview Content */}
-          <div className="relative h-[calc(100%-50px)]">
-            {/* Project Info - Always show first */}
-            <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} p-4 flex flex-col justify-center ${showIframe && !hasError ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
-              <div className="text-center">
-                <div className="text-3xl mb-3">🌐</div>
-                <h5 className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                  {project.title}
-                </h5>
-                <p className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3 leading-relaxed`}>
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1 justify-center mb-3">
-                  {project.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className={`px-2 py-1 ${isDarkMode ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-100 text-purple-700'} rounded-full text-xs`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Click to open live site →
-                </p>
-              </div>
-            </div>
-
-            {/* Iframe Preview - Try to load after project info */}
-            {showIframe && (
-              <>
-                {isLoading && !hasError && (
-                  <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center z-10`}>
-                    <div className="text-center">
-                      <div className="animate-spin w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-2"></div>
-                      <p className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Loading live preview...</p>
-                    </div>
-                  </div>
-                )}
-                
-                <iframe
-                  src={project.liveUrl}
-                  title={`${project.title} hover preview`}
-                  className={`w-full h-full border-0 ${hasError ? 'hidden' : ''}`}
-                  style={{ 
-                    transform: 'scale(0.8)',
-                    transformOrigin: 'top left',
-                    width: '125%', 
-                    height: '125%'
-                  }}
-                  loading="lazy"
-                  sandbox="allow-same-origin allow-scripts"
-                  onLoad={() => {
-                    setIsLoading(false)
-                    setHasError(false)
-                  }}
-                  onError={() => {
-                    setIsLoading(false)
-                    setHasError(true)
-                  }}
-                />
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // Preview Modal Component
-  const PreviewModal = ({ isOpen, project, onClose, isDarkMode }) => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [hasError, setHasError] = useState(false)
-    const [loadTimeout, setLoadTimeout] = useState(false)
-    const [iframeBlocked, setIframeBlocked] = useState(false)
-
-    // Handle escape key and body scroll
-    useEffect(() => {
-      const handleEscape = (e) => {
-        if (e.key === 'Escape' && isOpen) {
-          onClose()
-        }
-      }
-
-      if (isOpen) {
-        document.addEventListener('keydown', handleEscape)
-        // Add modal-open class instead of directly setting styles
-        document.body.classList.add('modal-open')
-        
-        return () => {
-          document.removeEventListener('keydown', handleEscape)
-          document.body.classList.remove('modal-open')
-        }
-      } else {
-        // Ensure modal-open class is removed when modal is closed
-        document.body.classList.remove('modal-open')
-      }
-    }, [isOpen, onClose])
-
-    // Reset loading state when modal opens
-    useEffect(() => {
-      if (isOpen) {
-        setIsLoading(true)
-        setHasError(false)
-        setLoadTimeout(false)
-        setIframeBlocked(false)
-        
-        // Set a timeout for loading - shorter timeout for better UX
-        const timer = setTimeout(() => {
-          setLoadTimeout(true)
-          setIframeBlocked(true) // Assume blocked if taking too long
-          setIsLoading(false)
-        }, 5000) // 5 seconds timeout - most blocked iframes fail quickly
-        
-        return () => clearTimeout(timer)
-      }
-    }, [isOpen])
-
-    if (!isOpen || !project) return null
-
-    return (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-        {/* Backdrop */}
-        <div 
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          onClick={onClose}
-        />
-        
-        {/* Modal Content */}
-        <div className={`relative w-full max-w-7xl h-[90vh] ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl overflow-hidden shadow-2xl`}>
-          {/* Modal Header */}
-          <div className={`flex items-center justify-between p-4 border-b ${isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-gray-50'}`}>
-            <div>
-              <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                {project.title} - Live Preview
-              </h3>
-              <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                {project.liveUrl}
-              </p>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              {/* External Link Button */}
-              <button
-                onClick={() => window.open(project.liveUrl, '_blank')}
-                className={`px-4 py-2 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'} rounded-lg transition-all duration-200 flex items-center space-x-2`}
-                title="Open in new tab"
-              >
-                <span>↗</span>
-                <span className="hidden sm:inline">Open</span>
-              </button>
-              
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                className={`px-4 py-2 ${isDarkMode ? 'bg-red-600 hover:bg-red-700' : 'bg-red-500 hover:bg-red-600'} text-white rounded-lg transition-all duration-200`}
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-          
-          {/* Iframe Container */}
-          <div className="relative h-[calc(100%-80px)]">
-            {/* Loading Overlay */}
-            {isLoading && !iframeBlocked && (
-              <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center z-10`}>
-                <div className="text-center">
-                  <div className="animate-spin w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Loading preview...</p>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-2`}>Press Escape to close</p>
-                </div>
-              </div>
-            )}
-
-            {/* Iframe Blocked/Error Fallback */}
-            {(iframeBlocked || hasError || loadTimeout) && (
-              <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center z-10`}>
-                <div className="text-center max-w-md mx-auto p-8">
-                  <div className={`w-16 h-16 mx-auto mb-6 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
-                    <span className="text-2xl">🔒</span>
-                  </div>
-                  <h4 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Preview Not Available
-                  </h4>
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-6 leading-relaxed`}>
-                    This website cannot be previewed in an iframe due to security restrictions. 
-                    This is a common security feature that prevents embedding.
-                  </p>
-                  <button
-                    onClick={() => window.open(project.liveUrl, '_blank')}
-                    className="px-6 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-lg hover:from-purple-600 hover:to-cyan-600 transition-all duration-200 transform hover:scale-105 shadow-lg font-medium"
-                  >
-                    View Full Site →
-                  </button>
-                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} mt-4`}>
-                    Opens in a new tab
-                  </p>
-                </div>
-              </div>
-            )}
-            
-            <iframe
-              src={project.liveUrl}
-              title={`${project.title} Preview`}
-              className={`w-full h-full border-0 ${(iframeBlocked || hasError || loadTimeout) ? 'hidden' : ''}`}
-              loading="lazy"
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-pointer-lock"
-              onLoad={(e) => {
-                // Check if iframe actually loaded content or was blocked
-                try {
-                  const iframe = e.target
-                  // Try to access iframe content to detect blocking
-                  if (iframe.contentWindow && iframe.contentWindow.location.href === 'about:blank') {
-                    setIframeBlocked(true)
-                    setHasError(true)
-                  } else {
-                    setIsLoading(false)
-                    setIframeBlocked(false)
-                    setHasError(false)
-                    setLoadTimeout(false)
-                  }
-                } catch (error) {
-                  // If we can't access iframe content, it might be blocked or loaded
-                  // For cross-origin iframes, this is expected, so we assume success
-                  setIsLoading(false)
-                  setIframeBlocked(false)
-                  setHasError(false)
-                  setLoadTimeout(false)
-                }
-              }}
-              onError={() => {
-                setIsLoading(false)
-                setHasError(true)
-                setIframeBlocked(true)
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   // Early return for loading state
   if (isLoading) {
@@ -1006,7 +804,8 @@ function App() {
             <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto leading-relaxed mt-6`}>
               Crafting digital experiences with a perfect blend of creativity and technical mastery
             </p>
-          </div>
+          </div
+          >
           
           {/* Revolutionary Skills Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
@@ -1170,9 +969,22 @@ function App() {
           <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
             Featured Projects
           </h2>
-          
+
+          {/* Project Filters */}
+          <Suspense fallback={<div className="text-center py-8">Loading filters...</div>}>
+            <ProjectFilters
+              filters={filterCategories}
+              activeFilters={activeFilters}
+              onFilterChange={handleFilterChange}
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+              isDarkMode={isDarkMode}
+              projectCount={filteredProjects.length}
+            />
+          </Suspense>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <div 
                 key={project.title} 
                 className={`group relative ${isDarkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'} backdrop-blur-sm rounded-xl overflow-hidden border card-hover-effect animate-fade-in-scale transition-all duration-300`} 
