@@ -110,6 +110,8 @@ function App() {
     { name: 'JavaScript', level: 92, icon: '📝', color: 'from-yellow-400 to-orange-500' },
     { name: 'TypeScript', level: 88, icon: '🔷', color: 'from-blue-500 to-indigo-600' },
     { name: 'Node.js', level: 85, icon: '🟢', color: 'from-green-400 to-green-600' },
+    { name: 'Express.js', level: 88, icon: '🚀', color: 'from-gray-600 to-gray-800' },
+    { name: 'MongoDB', level: 82, icon: '🍃', color: 'from-green-500 to-green-700' },
     { name: 'HTML', level: 95, icon: '🌐', color: 'from-orange-400 to-red-500' },
     { name: 'CSS/SCSS', level: 90, icon: '🎨', color: 'from-pink-400 to-purple-600' }
   ]
