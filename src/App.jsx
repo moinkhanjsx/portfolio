@@ -74,7 +74,6 @@ function App() {
     {
       title: 'AI-Powered Portfolio',
       description: 'Advanced React portfolio with AI features, dynamic themes, and stunning animations.',
-      image: '/api/placeholder/400/250',
       tags: ['React', 'Tailwind CSS', 'AOS', 'Vite'],
       liveUrl: 'https://portfolio-demo.com',
       githubUrl: 'https://github.com/moinkhan-in/portfolio',
@@ -83,7 +82,6 @@ function App() {
     {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with React frontend, Node.js backend, and secure payments.',
-      image: '/api/placeholder/400/250',
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       githubUrl: 'https://github.com/moinkhan-in/ecommerce',
       featured: true
@@ -91,7 +89,6 @@ function App() {
     {
       title: 'Task Management App',
       description: 'Productivity application with drag-and-drop functionality and real-time collaboration.',
-      image: '/api/placeholder/400/250',
       tags: ['React', 'Firebase', 'Material-UI', 'WebSocket'],
       liveUrl: 'https://taskflow-pro.netlify.app/',
       githubUrl: 'https://github.com/moinkhan-in/task-manager',
