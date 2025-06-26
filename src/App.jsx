@@ -55,11 +55,13 @@ function App() {
     
     // Add debugging for scroll issues
     const debugScrollIssues = () => {
-      const bodyOverflow = window.getComputedStyle(document.body).overflow
-      const htmlOverflow = window.getComputedStyle(document.documentElement).overflow
-      
-      if (bodyOverflow === 'hidden' || htmlOverflow === 'hidden') {
-        console.warn('Scroll may be blocked:', { bodyOverflow, htmlOverflow })
+      if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+        const bodyOverflow = window.getComputedStyle(document.body).overflow
+        const htmlOverflow = window.getComputedStyle(document.documentElement).overflow
+        
+        if (bodyOverflow === 'hidden' || htmlOverflow === 'hidden') {
+          console.warn('Scroll may be blocked:', { bodyOverflow, htmlOverflow })
+        }
       }
     }
     
@@ -92,7 +94,7 @@ function App() {
       const offsetTop = element.offsetTop - headerHeight - 20
       
       // Ensure we're not in a modal state that might interfere
-      if (document.body.style.overflow !== 'hidden') {
+      if (document.body.style.overflow !== 'hidden' && typeof window !== 'undefined') {
         window.scrollTo({
           top: Math.max(0, offsetTop),
           behavior: 'smooth'
@@ -185,8 +187,8 @@ function App() {
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         style={{
-          left: position.x > window.innerWidth / 2 ? position.x - 340 : position.x + 20,
-          top: Math.max(20, Math.min(position.y - 150, window.innerHeight - 280)),
+          left: (typeof window !== 'undefined' && position.x > window.innerWidth / 2) ? position.x - 340 : position.x + 20,
+          top: typeof window !== 'undefined' ? Math.max(20, Math.min(position.y - 150, window.innerHeight - 280)) : position.y - 150,
         }}
       >
         <div className={`w-80 h-60 ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border-2 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm`}>
@@ -297,12 +299,7 @@ function App() {
           document.body.classList.remove('modal-open')
         }
       } else {
-        // Ensure modal-open class is removed
-        document.body.classList.remove('modal-open')
-      }
-
-      return () => {
-        document.removeEventListener('keydown', handleEscape)
+        // Ensure modal-open class is removed when modal is closed
         document.body.classList.remove('modal-open')
       }
     }, [isOpen, onClose])
