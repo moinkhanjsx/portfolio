@@ -187,11 +187,15 @@ function App() {
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         style={{
-          left: (typeof window !== 'undefined' && position.x > window.innerWidth / 2) ? position.x - 340 : position.x + 20,
+          left: typeof window !== 'undefined' 
+            ? (window.innerWidth < 640 
+              ? Math.max(10, Math.min(position.x - 160, window.innerWidth - 340)) 
+              : (position.x > window.innerWidth / 2 ? position.x - 340 : position.x + 20))
+            : position.x + 20,
           top: typeof window !== 'undefined' ? Math.max(20, Math.min(position.y - 150, window.innerHeight - 280)) : position.y - 150,
         }}
       >
-        <div className={`w-80 h-60 ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border-2 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm`}>
+        <div className={`w-80 sm:w-80 max-w-[90vw] h-60 ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border-2 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm`}>
           {/* Header */}
           <div className={`px-4 py-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-b flex items-center justify-between`}>
             <div>
@@ -569,11 +573,11 @@ function App() {
       <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
         <div className="text-center max-w-6xl mx-auto">
           <div className="mb-16">
-            <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black mb-8 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent leading-none`}>
+            <h1 className={`text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-[10rem] font-black mb-8 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent leading-none`}>
               <SimpleTyping text="MOIN KHAN" speed={120} />
             </h1>
             
-            <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold mb-10 ${isDarkMode ? 'text-white' : 'text-gray-900'} leading-tight`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-10 ${isDarkMode ? 'text-white' : 'text-gray-900'} leading-tight`}>
               Full-Stack Developer
             </h2>
             
@@ -618,7 +622,7 @@ function App() {
       {/* About Section */}
       <section id="about" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
         <div className="max-w-7xl mx-auto">
-          <h2 className={`text-4xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
             About Me
           </h2>
           
@@ -668,7 +672,7 @@ function App() {
       {/* Skills Section */}
       <section id="skills" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
         <div className="max-w-7xl mx-auto">
-          <h2 className={`text-4xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
             Skills & Expertise
           </h2>
           
@@ -695,7 +699,7 @@ function App() {
       {/* Projects Section */}
       <section id="projects" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
         <div className="max-w-7xl mx-auto">
-          <h2 className={`text-4xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
             Featured Projects
           </h2>
           
@@ -707,7 +711,8 @@ function App() {
                 data-aos="fade-up" 
                 data-aos-delay={index * 100}
                 onMouseEnter={(e) => {
-                  if (project.liveUrl && project.previewable) {
+                  // Only show hover preview on non-touch devices
+                  if (project.liveUrl && project.previewable && !('ontouchstart' in window)) {
                     // Clear any existing timeout
                     if (hoverTimeout) {
                       clearTimeout(hoverTimeout)
@@ -820,7 +825,7 @@ function App() {
                         title="Quick preview in modal"
                       >
                         <span>👁️</span>
-                        <span>Preview</span>
+                        <span className="hidden sm:inline">Preview</span>
                       </button>
                     )}
                     {project.liveUrl && (
@@ -830,7 +835,7 @@ function App() {
                         title="Open full site in new tab"
                       >
                         <span>↗️</span>
-                        <span>Visit Site</span>
+                        <span className="hidden sm:inline">Visit Site</span>
                       </button>
                     )}
                     <button 
@@ -850,7 +855,7 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`text-4xl sm:text-6xl font-bold mb-8 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
             Let's Create Something Amazing
           </h2>
           

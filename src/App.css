@@ -23,3 +23,10 @@ body {
 .modal-open {
   overflow: hidden !important;
 }
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
