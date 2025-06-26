@@ -751,52 +751,218 @@ function App() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-24 px-4 sm:px-6 relative" data-aos="fade-up">
-        <div className="max-w-7xl mx-auto">
-          <h2 className={`text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
-            About Me
-          </h2>
+      {/* Enhanced About Section */}
+      <section id="about" className="py-24 px-4 sm:px-6 relative overflow-hidden" data-aos="fade-up">
+        {/* Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute top-1/4 left-1/4 w-96 h-96 ${isDarkMode ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-r from-purple-300/20 to-pink-300/20'} rounded-full blur-3xl animate-pulse`}></div>
+          <div className={`absolute bottom-1/4 right-1/4 w-80 h-80 ${isDarkMode ? 'bg-gradient-to-r from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-r from-cyan-300/20 to-blue-300/20'} rounded-full blur-3xl animate-pulse`} style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r ${isDarkMode ? 'from-purple-400 via-pink-400 to-cyan-400' : 'from-purple-600 via-blue-600 to-pink-600'} bg-clip-text text-transparent`}>
+              About Me
+            </h2>
+            <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
+              Passionate developer, problem solver, and technology enthusiast crafting digital experiences that matter.
+            </p>
+          </div>
           
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+            {/* Personal Story & Photo */}
             <div className="space-y-8">
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg blur opacity-25"></div>
-                <div className={`relative p-8 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-sm rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                    My Journey
-                  </h3>
-                  <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>
-                    I'm a passionate full-stack developer with over 5 years of experience creating innovative web applications. 
-                    My expertise spans from modern frontend frameworks to robust backend architectures, with a special focus 
-                    on AI integration and user experience optimization.
-                  </p>
+              {/* Profile Card */}
+              <div className={`relative group`}>
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+                <div className={`relative p-8 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-sm rounded-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                  {/* Profile Image Placeholder */}
+                  <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
+                    <div className="relative">
+                      <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-4xl font-bold text-white shadow-lg">
+                        MK
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-white animate-pulse"></div>
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
+                        Moin Khan
+                      </h3>
+                      <p className="text-lg bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
+                        Full Stack Developer
+                      </p>
+                      <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        📍 Pakistan • 🌍 Available Worldwide
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                      My Story 📖
+                    </h4>
+                    <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>
+                      Hey there! I'm a passionate full-stack developer with <strong>3+ years</strong> of experience turning ideas into reality. 
+                      My journey started with curiosity about how websites work, and it evolved into a deep love for creating 
+                      seamless digital experiences that users actually enjoy.
+                    </p>
+                    <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>
+                      I specialize in the <strong>MERN stack</strong> and have a knack for solving complex problems with elegant solutions. 
+                      Whether it's building responsive frontends, designing scalable APIs, or optimizing database performance, 
+                      I bring both technical expertise and creative thinking to every project.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Facts */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className={`p-4 ${isDarkMode ? 'bg-gray-800/30 border-gray-700' : 'bg-white/50 border-gray-200'} backdrop-blur-sm rounded-xl border text-center hover:scale-105 transition-all duration-300`}>
+                  <div className="text-2xl mb-2">🚀</div>
+                  <div className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>50+</div>
+                  <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects Completed</div>
+                </div>
+                <div className={`p-4 ${isDarkMode ? 'bg-gray-800/30 border-gray-700' : 'bg-white/50 border-gray-200'} backdrop-blur-sm rounded-xl border text-center hover:scale-105 transition-all duration-300`}>
+                  <div className="text-2xl mb-2">⭐</div>
+                  <div className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>95%</div>
+                  <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Client Satisfaction</div>
                 </div>
               </div>
             </div>
             
+            {/* Skills & Expertise */}
             <div className="space-y-6">
-              <div className={`p-6 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                <h4 className="text-xl font-bold mb-3 text-purple-400">Frontend Expertise</h4>
-                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  React, Vue.js, TypeScript, Tailwind CSS, Three.js, GSAP
+              <h4 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                What I Bring to the Table ⚡
+              </h4>
+
+              {/* Frontend */}
+              <div className={`group p-6 ${isDarkMode ? 'bg-gray-800/50 hover:bg-gray-800/70' : 'bg-white/80 hover:bg-white/90'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} hover:border-purple-400 transition-all duration-300`}>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-white text-xl">⚛️</span>
+                  </div>
+                  <div>
+                    <h5 className="text-xl font-bold text-blue-400">Frontend Wizard</h5>
+                    <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Creating beautiful, responsive UIs</p>
+                  </div>
+                </div>
+                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3`}>
+                  React • TypeScript • Tailwind CSS • HTML5 • CSS3/SCSS • Responsive Design
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['React', 'TypeScript', 'Tailwind', 'HTML5'].map((tech) => (
+                    <span key={tech} className={`px-3 py-1 ${isDarkMode ? 'bg-blue-900/50 text-blue-300' : 'bg-blue-100 text-blue-700'} rounded-full text-xs font-medium`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Backend */}
+              <div className={`group p-6 ${isDarkMode ? 'bg-gray-800/50 hover:bg-gray-800/70' : 'bg-white/80 hover:bg-white/90'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} hover:border-green-400 transition-all duration-300`}>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-white text-xl">🚀</span>
+                  </div>
+                  <div>
+                    <h5 className="text-xl font-bold text-green-400">Backend Architect</h5>
+                    <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Building scalable server solutions</p>
+                  </div>
+                </div>
+                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3`}>
+                  Node.js • Express.js • RESTful APIs • MongoDB • Database Design • Authentication
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Node.js', 'Express.js', 'MongoDB', 'APIs'].map((tech) => (
+                    <span key={tech} className={`px-3 py-1 ${isDarkMode ? 'bg-green-900/50 text-green-300' : 'bg-green-100 text-green-700'} rounded-full text-xs font-medium`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tools & More */}
+              <div className={`group p-6 ${isDarkMode ? 'bg-gray-800/50 hover:bg-gray-800/70' : 'bg-white/80 hover:bg-white/90'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} hover:border-purple-400 transition-all duration-300`}>
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-white text-xl">🛠️</span>
+                  </div>
+                  <div>
+                    <h5 className="text-xl font-bold text-purple-400">Tools & Workflow</h5>
+                    <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Efficient development practices</p>
+                  </div>
+                </div>
+                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3`}>
+                  Git/GitHub • VS Code • Figma • Vite • npm/yarn • Responsive Design • SEO
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Git', 'VS Code', 'Figma', 'Vite'].map((tech) => (
+                    <span key={tech} className={`px-3 py-1 ${isDarkMode ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-100 text-purple-700'} rounded-full text-xs font-medium`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Values & Approach */}
+          <div className={`relative p-8 ${isDarkMode ? 'bg-gradient-to-r from-gray-800/50 to-gray-900/50' : 'bg-gradient-to-r from-white/50 to-gray-50/50'} backdrop-blur-sm rounded-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+            <div className="text-center mb-8">
+              <h4 className="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                My Development Philosophy 💡
+              </h4>
+              <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} max-w-3xl mx-auto`}>
+                I believe in writing clean, maintainable code and creating solutions that not only work well but feel great to use.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white text-2xl">🎯</span>
+                </div>
+                <h5 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>User-Centric</h5>
+                <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
+                  Every decision is made with the end user in mind, ensuring intuitive and delightful experiences.
                 </p>
               </div>
-              
-              <div className={`p-6 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                <h4 className="text-xl font-bold mb-3 text-cyan-400">Backend Mastery</h4>
-                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Node.js, Express, REST APIs, MongoDB, PostgreSQL, MySQL
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white text-2xl">⚡</span>
+                </div>
+                <h5 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>Performance First</h5>
+                <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
+                  Optimized code, fast loading times, and smooth interactions are non-negotiable standards.
                 </p>
               </div>
-              
-              <div className={`p-6 ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-lg rounded-xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                <h4 className="text-xl font-bold mb-3 text-pink-400">AI & Innovation</h4>
-                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  TensorFlow, OpenAI GPT, Computer Vision, NLP, Machine Learning
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white text-2xl">🔧</span>
+                </div>
+                <h5 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>Clean Code</h5>
+                <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
+                  Maintainable, scalable, and well-documented code that teams love to work with.
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}>
+              Ready to turn your ideas into amazing digital experiences?
+            </p>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-white font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 inline-flex items-center space-x-2"
+            >
+              <span>Let's work together</span>
+              <span>🚀</span>
+            </button>
           </div>
         </div>
       </section>
