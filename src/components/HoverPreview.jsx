@@ -1,127 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React from "react";
 
-const HoverPreview = ({ project, position, isDarkMode }) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const [showIframe, setShowIframe] = useState(false)
 
-  // Animate appearance
-  useEffect(() => {
-    if (project && position) {
-      setIsVisible(true)
-      setIsLoading(true)
-      setHasError(false)
-      setShowIframe(false)
-      
-      // Delay iframe loading to first show project info
-      const iframeTimeout = setTimeout(() => {
-        setShowIframe(true)
-      }, 200)
-      
-      return () => clearTimeout(iframeTimeout)
-    } else {
-      setIsVisible(false)
-    }
-  }, [project, position])
 
-  if (!project || !position) return null
-
-  return (
-    <div 
-      className={`fixed z-[90] pointer-events-none transition-all duration-200 ${
-        isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-      }`}
-      style={{
-        left: typeof window !== 'undefined' 
-          ? (window.innerWidth < 640 
-            ? Math.max(10, Math.min(position.x - 160, window.innerWidth - 340)) 
-            : (position.x > window.innerWidth / 2 ? position.x - 340 : position.x + 20))
-          : position.x + 20,
-        top: typeof window !== 'undefined' ? Math.max(20, Math.min(position.y - 150, window.innerHeight - 280)) : position.y - 150,
-      }}
-    >
-      <div className={`w-80 sm:w-80 max-w-[90vw] h-60 ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} border-2 rounded-xl overflow-hidden shadow-2xl backdrop-blur-sm`}>
-        {/* Header */}
-        <div className={`px-4 py-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-b flex items-center justify-between`}>
-          <div>
-            <h4 className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-              {project.title}
-            </h4>
-            <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Live Preview
-            </p>
-          </div>
-          <div className="flex items-center space-x-1">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>LIVE</span>
-          </div>
+const HoverPreview = ({ image, title, description }) => (
+  <div className="group relative rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg bg-white/80 dark:bg-gray-900/80 backdrop-blur-md transition-all duration-300 hover:shadow-2xl hover:border-amber-500 hover:scale-[1.025]">
+    <div className="relative h-56 bg-gradient-to-br from-amber-100 via-white to-amber-200 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <img
+        src={image}
+        alt={title}
+        className="object-cover h-full w-full group-hover:scale-105 transition-transform duration-500 rounded-t-3xl"
+      />
+      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="bg-white/70 dark:bg-gray-900/70 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md border border-amber-400">
+          <span className="text-gray-900 dark:text-white text-base font-semibold text-center drop-shadow-lg">{description}</span>
         </div>
-
-        {/* Preview Content */}
-        <div className="relative h-[calc(100%-50px)]">
-          {/* Project Info - Always show first */}
-          <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} p-4 flex flex-col justify-center ${showIframe && !hasError ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
-            <div className="text-center">
-              <div className="text-3xl mb-3">🌐</div>
-              <h5 className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
-                {project.title}
-              </h5>
-              <p className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-3 leading-relaxed`}>
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-1 justify-center mb-3">
-                {project.tags.slice(0, 3).map((tag) => (
-                  <span key={tag} className={`px-2 py-1 ${isDarkMode ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-100 text-purple-700'} rounded-full text-xs`}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                Click to open live site →
-              </p>
-            </div>
-          </div>
-
-          {/* Iframe Preview - Try to load after project info */}
-          {showIframe && (
-            <>
-              {isLoading && !hasError && (
-                <div className={`absolute inset-0 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} flex items-center justify-center z-10`}>
-                  <div className="text-center">
-                    <div className="animate-spin w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full mx-auto mb-2"></div>
-                    <p className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Loading live preview...</p>
-                  </div>
-                </div>
-              )}
-              
-              <iframe
-                src={project.liveUrl}
-                title={`${project.title} hover preview`}
-                className={`w-full h-full border-0 ${hasError ? 'hidden' : ''}`}
-                style={{ 
-                  transform: 'scale(0.8)',
-                  transformOrigin: 'top left',
-                  width: '125%', 
-                  height: '125%'
-                }}
-                loading="lazy"
-                sandbox="allow-same-origin allow-scripts"
-                onLoad={() => {
-                  setIsLoading(false)
-                  setHasError(false)
-                }}
-                onError={() => {
-                  setIsLoading(false)
-                  setHasError(true)
-                }}
-              />
-            </>
-          )}
-        </div>
+        <span className="mt-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500 text-white shadow-lg border-4 border-white dark:border-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
       </div>
     </div>
-  )
-}
+    <div className="p-6 flex flex-col items-center">
+      <h3 className="text-2xl font-extrabold mb-2 text-center group-hover:text-amber-600 transition-colors duration-300 drop-shadow-lg">{title}</h3>
+    </div>
+    <div className="absolute inset-0 pointer-events-none rounded-3xl group-hover:ring-4 group-hover:ring-amber-300/40 transition-all duration-300" />
+  </div>
+);
 
-export default HoverPreview
+export default HoverPreview;
