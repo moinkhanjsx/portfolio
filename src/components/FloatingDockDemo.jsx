@@ -1,40 +1,7 @@
+import React from 'react';
+import FloatingDock from './FloatingDock';
 
-import './App.css';
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Home from "./components/Home";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
-import Contact from "./components/Contact";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
-import FloatingDock from "./components/FloatingDock";
-import FloatingDockToggle from "./components/FloatingDockToggle";
-
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showFloatingDock, setShowFloatingDock] = useState(false);
-
-  useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // Show floating dock after initial load
-    const dockTimer = setTimeout(() => {
-      setShowFloatingDock(true);
-    }, 3000);
-
-    return () => clearTimeout(dockTimer);
-  }, []);
-
+const FloatingDockDemo = () => {
   const dockItems = [
     {
       title: "Home",
@@ -101,104 +68,29 @@ function App() {
     },
   ];
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <motion.div
-            className="w-24 h-24 mx-auto mb-6"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-full h-full text-amber-600 dark:text-amber-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-            </svg>
-          </motion.div>
-          <motion.h1
-            className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Loading Portfolio...
-          </motion.h1>
-          <motion.p
-            className="text-lg text-gray-600 dark:text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Preparing something amazing for you
-          </motion.p>
-        </motion.div>
-      </div>
-    );
-  }
-
   return (
-    <>
-      <div className="min-h-screen bg-white dark:bg-gray-900">
-        {/* Skip to main content link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-amber-600 text-white px-4 py-2 rounded-lg z-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-        >
-          Skip to main content
-        </a>
-
-        {/* Main Navigation */}
-        <Navbar />
-
-        {/* Main Content */}
-        <main id="main-content">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key="portfolio-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
-              <Home />
-              <About />
-              <Projects />
-              <Skills />
-              <Contact />
-            </motion.div>
-          </AnimatePresence>
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Scroll to Top Button */}
-        <ScrollToTop />
-
-        {/* Floating Dock - Alternative Navigation */}
-        <AnimatePresence>
-          {showFloatingDock && (
-            <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <FloatingDock
-                items={dockItems}
-                mobileClassName="translate-y-20"
-                dockPosition="bottom"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-amber-100 dark:from-gray-900 dark:to-gray-800 relative">
+      {/* Content */}
+      <div className="flex items-center justify-center h-screen w-full">
+        <div className="text-center">
+          <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            Floating Dock Demo
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
+            Hover over the dock items below to see the macOS-style magnification effect. 
+            Each item scales smoothly and shows a tooltip with its title.
+          </p>
+        </div>
       </div>
-    </>
-  );
-}
 
-export default App;
+      {/* Floating Dock */}
+      <FloatingDock
+        items={dockItems}
+        mobileClassName="translate-y-20"
+        dockPosition="bottom"
+      />
+    </div>
+  );
+};
+
+export default FloatingDockDemo; 

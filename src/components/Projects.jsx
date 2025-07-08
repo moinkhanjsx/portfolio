@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import HoverPreview from "./HoverPreview";
 import PreviewModal from "./PreviewModal";
 
@@ -26,6 +27,27 @@ const projects = [
   }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
 
 const Projects = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -41,15 +63,49 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-16 px-0 sm:px-2 w-full">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0">
+    <section id="projects" className="py-12 sm:py-16 px-0 sm:px-2 w-full" aria-labelledby="projects-heading">
+      <motion.h2 
+        id="projects-heading"
+        className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        Projects
+      </motion.h2>
+      <motion.div 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        role="list"
+        aria-label="Project portfolio"
+      >
         {projects.map((project, idx) => (
-          <div key={idx} onClick={() => handleOpen(project)} className="cursor-pointer">
+          <motion.div 
+            key={idx} 
+            onClick={() => handleOpen(project)} 
+            className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 rounded-lg"
+            variants={itemVariants}
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            role="listitem"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleOpen(project);
+              }
+            }}
+            aria-label={`View details for ${project.title} project`}
+          >
             <HoverPreview {...project} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
       <PreviewModal open={modalOpen} onClose={handleClose} project={selected} />
     </section>
   );

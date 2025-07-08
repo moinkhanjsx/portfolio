@@ -1,20 +1,185 @@
 import React from "react";
-import Loader from "./Loader";
+import { motion } from "framer-motion";
+import TypingAnimation from "./TypingAnimation";
+import MorphingText from "./MorphingText";
 
-const About = () => (
-  <section id="about" className="py-20 px-4 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
-    <div className="flex-1 flex flex-col justify-center min-w-0">
-      <h2 className="text-3xl font-bold mb-4">About Me</h2>
-      <p className="text-lg text-gray-700 dark:text-gray-300">
-        I am a passionate developer eager to build beautiful and functional web experiences. Welcome to my portfolio!
-      </p>
-    </div>
-    <div className="flex-1 flex justify-center items-center min-w-0">
-      <div className="w-full flex justify-center items-center">
-        <Loader />
+const About = () => {
+  return (
+    <section id="about" className="py-16 sm:py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <TypingAnimation 
+              speed={100} 
+              delay={0.5}
+              className="bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
+            >
+              About Me
+            </TypingAnimation>
+          </h2>
+          <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full"></div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+              I am a passionate{" "}
+              <MorphingText 
+                texts={[
+                  "web developer",
+                  "frontend engineer", 
+                  "React specialist",
+                  "UI/UX designer",
+                  "problem solver",
+                  "creative coder"
+                ]}
+                className="text-amber-600 dark:text-amber-400 font-semibold"
+                duration={3000}
+                transitionDuration={0.5}
+                delay={2000}
+              />
+              {" "}with a strong foundation in modern web technologies. I specialize in creating{" "}
+              <MorphingText 
+                texts={[
+                  "beautiful",
+                  "responsive", 
+                  "accessible",
+                  "performant",
+                  "user-friendly",
+                  "innovative"
+                ]}
+                className="text-amber-600 dark:text-amber-400 font-semibold"
+                duration={2500}
+                transitionDuration={0.4}
+                delay={4000}
+              />
+              {" "}web applications that provide exceptional user experiences.
+            </p>
+            
+            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+              With expertise in{" "}
+              <MorphingText 
+                texts={[
+                  "React.js",
+                  "JavaScript", 
+                  "TypeScript",
+                  "Tailwind CSS",
+                  "Node.js",
+                  "Next.js"
+                ]}
+                className="text-amber-600 dark:text-amber-400 font-semibold"
+                duration={2000}
+                transitionDuration={0.3}
+                delay={6000}
+              />
+              , I bring ideas to life through clean, efficient code and{" "}
+              <MorphingText 
+                texts={[
+                  "intuitive",
+                  "modern", 
+                  "scalable",
+                  "maintainable",
+                  "robust",
+                  "elegant"
+                ]}
+                className="text-amber-600 dark:text-amber-400 font-semibold"
+                duration={2200}
+                transitionDuration={0.4}
+                delay={8000}
+              />
+              {" "}designs that stand out in today's digital landscape.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <motion.div
+                className="flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 px-4 py-2 rounded-lg"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                <span className="text-amber-700 dark:text-amber-300 font-medium">3+ Years Experience</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 px-4 py-2 rounded-lg"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                <span className="text-amber-700 dark:text-amber-300 font-medium">50+ Projects</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 px-4 py-2 rounded-lg"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                <span className="text-amber-700 dark:text-amber-300 font-medium">Always Learning</span>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            <div className="bg-gradient-to-br from-amber-400 to-amber-600 p-1 rounded-2xl shadow-2xl">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  <motion.div
+                    className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">3+</div>
+                    <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300">Years Experience</div>
+                  </motion.div>
+                  <motion.div
+                    className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">50+</div>
+                    <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300">Projects Completed</div>
+                  </motion.div>
+                  <motion.div
+                    className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">15+</div>
+                    <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300">Technologies</div>
+                  </motion.div>
+                  <motion.div
+                    className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">100%</div>
+                    <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300">Client Satisfaction</div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default About;
