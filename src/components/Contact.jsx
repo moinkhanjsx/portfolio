@@ -6,7 +6,7 @@ import MorphingText from "./MorphingText";
 const Contact = () => {
   return (
     <section id="contact" className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-full px-2 sm:px-6 lg:px-8 mx-auto overflow-x-hidden">
         <motion.div
           className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 50 }}
@@ -15,29 +15,33 @@ const Contact = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <TypingAnimation 
-              speed={100} 
-              delay={0.5}
-              className="bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
-            >
-              Get In Touch
-            </TypingAnimation>
+            <span className="inline-block min-w-[140px]">
+              <TypingAnimation 
+                speed={100} 
+                delay={0.5}
+                className="bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
+              >
+                Get In Touch
+              </TypingAnimation>
+            </span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            <MorphingText 
-              texts={[
-                "Ready to start a project?",
-                "Have a question?",
-                "Want to collaborate?",
-                "Need a developer?",
-                "Let's build something amazing!",
-                "Ready to bring your ideas to life?"
-              ]}
-              className="text-lg sm:text-xl text-gray-600 dark:text-gray-300"
-              duration={3000}
-              transitionDuration={0.5}
-              delay={2000}
-            />
+            <span className="inline-block min-w-[260px]">
+              <MorphingText 
+                texts={[
+                  "Ready to start a project?",
+                  "Have a question?",
+                  "Want to collaborate?",
+                  "Need a developer?",
+                  "Let's build something amazing!",
+                  "Ready to bring your ideas to life?"
+                ]}
+                className="text-lg sm:text-xl text-gray-600 dark:text-gray-300"
+                duration={3000}
+                transitionDuration={0.5}
+                delay={2000}
+              />
+            </span>
           </p>
           <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mt-4"></div>
         </motion.div>
@@ -52,19 +56,21 @@ const Contact = () => {
           >
             <div className="bg-white dark:bg-gray-700 rounded-2xl p-6 sm:p-8 shadow-xl">
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                <MorphingText 
-                  texts={[
-                    "Contact Information",
-                    "Get In Touch",
-                    "Let's Connect",
-                    "Reach Out",
-                    "Start a Conversation"
-                  ]}
-                  className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
-                  duration={4000}
-                  transitionDuration={0.6}
-                  delay={3000}
-                />
+                <span className="inline-block min-w-[180px]">
+                  <MorphingText 
+                    texts={[
+                      "Contact Information",
+                      "Get In Touch",
+                      "Let's Connect",
+                      "Reach Out",
+                      "Start a Conversation"
+                    ]}
+                    className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
+                    duration={4000}
+                    transitionDuration={0.6}
+                    delay={3000}
+                  />
+                </span>
               </h3>
               
               <div className="space-y-4">
@@ -138,19 +144,21 @@ const Contact = () => {
           >
             <div className="bg-white dark:bg-gray-700 rounded-2xl p-6 sm:p-8 shadow-xl">
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                <MorphingText 
-                  texts={[
-                    "Send a Message",
-                    "Let's Talk",
-                    "Start a Project",
-                    "Get a Quote",
-                    "Discuss Ideas"
-                  ]}
-                  className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
-                  duration={3500}
-                  transitionDuration={0.5}
-                  delay={4000}
-                />
+                <span className="inline-block min-w-[180px]">
+                  <MorphingText 
+                    texts={[
+                      "Send a Message",
+                      "Let's Talk",
+                      "Start a Project",
+                      "Get a Quote",
+                      "Discuss Ideas"
+                    ]}
+                    className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
+                    duration={3500}
+                    transitionDuration={0.5}
+                    delay={4000}
+                  />
+                </span>
               </h3>
               
               <form className="space-y-4">
@@ -186,19 +194,21 @@ const Contact = () => {
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <MorphingText 
-                      texts={[
-                        "Message",
-                        "Project Details",
-                        "Tell me about your idea",
-                        "What can I help with?",
-                        "Your requirements"
-                      ]}
-                      className="text-sm font-medium text-gray-700 dark:text-gray-300"
-                      duration={4000}
-                      transitionDuration={0.6}
-                      delay={5000}
-                    />
+                    <span className="inline-block min-w-[140px]">
+                      <MorphingText 
+                        texts={[
+                          "Message",
+                          "Project Details",
+                          "Tell me about your idea",
+                          "What can I help with?",
+                          "Your requirements"
+                        ]}
+                        className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                        duration={4000}
+                        transitionDuration={0.6}
+                        delay={5000}
+                      />
+                    </span>
                   </label>
                   <textarea
                     id="message"

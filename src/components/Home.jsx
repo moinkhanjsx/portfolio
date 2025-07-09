@@ -4,7 +4,7 @@ import TypingAnimation from "./TypingAnimation";
 import MorphingText from "./MorphingText";
 
 const Home = () => (
-  <section id="home" className="min-h-[60vh] sm:min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 px-2 sm:px-0 relative overflow-hidden">
+  <section id="home" className="min-h-[60vh] sm:min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 w-full max-w-full overflow-x-hidden px-2 sm:px-0 relative">
     {/* Animated SVG background */}
     <motion.img 
       src="/vite.svg" 
@@ -32,13 +32,15 @@ const Home = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <TypingAnimation 
-        speed={150} 
-        delay={0.5}
-        className="bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 bg-clip-text text-transparent"
-      >
-        Moin Khan
-      </TypingAnimation>
+      <span className="inline-block min-w-[120px]">
+        <TypingAnimation 
+          speed={150} 
+          delay={0.5}
+          className="bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 bg-clip-text text-transparent"
+        >
+          Moin Khan
+        </TypingAnimation>
+      </span>
     </motion.h1>
     
     <motion.p 
@@ -47,21 +49,23 @@ const Home = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
     >
-      <MorphingText 
-        texts={[
-          "Web Developer",
-          "Frontend Engineer", 
-          "React Specialist",
-          "UI/UX Designer",
-          "Full Stack Developer",
-          "Problem Solver",
-          "Creative Coder"
-        ]}
-        className="text-lg sm:text-2xl text-gray-700 dark:text-gray-300 font-semibold"
-        duration={2500}
-        transitionDuration={0.4}
-        delay={3000}
-      />
+      <span className="inline-block min-w-[220px]">
+        <MorphingText 
+          texts={[
+            "Web Developer",
+            "Frontend Engineer", 
+            "React Specialist",
+            "UI/UX Designer",
+            "Full Stack Developer",
+            "Problem Solver",
+            "Creative Coder"
+          ]}
+          className="text-lg sm:text-2xl text-gray-700 dark:text-gray-300 font-semibold"
+          duration={2500}
+          transitionDuration={0.4}
+          delay={3000}
+        />
+      </span>
     </motion.p>
     
     <motion.div 

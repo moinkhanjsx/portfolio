@@ -42,9 +42,9 @@ const MorphingText = ({
         {isVisible && (
           <motion.span
             key={currentIndex}
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.8 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ 
               duration: transitionDuration,
               ease: "easeInOut"

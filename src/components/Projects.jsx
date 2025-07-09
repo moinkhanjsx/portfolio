@@ -63,10 +63,10 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-16 px-0 sm:px-2 w-full" aria-labelledby="projects-heading">
+    <section id="projects" className="py-12 sm:py-16 px-0 sm:px-2 w-full max-w-full overflow-x-hidden" aria-labelledby="projects-heading">
       <motion.h2 
         id="projects-heading"
-        className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center"
+        className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -75,7 +75,7 @@ const Projects = () => {
         Projects
       </motion.h2>
       <motion.div 
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0 w-full max-w-full overflow-x-hidden"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

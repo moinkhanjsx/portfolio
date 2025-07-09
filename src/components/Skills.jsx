@@ -81,12 +81,12 @@ const Skills = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="py-12 sm:py-16 px-2 sm:px-4 w-full bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow mb-8"
+      className="py-12 sm:py-16 px-2 sm:px-4 w-full max-w-full overflow-x-hidden bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow mb-8"
       aria-labelledby="skills-heading"
     >
       <motion.h2 
         id="skills-heading"
-        className="text-2xl sm:text-3xl font-bold mb-8 text-center"
+        className="text-2xl sm:text-3xl font-bold mb-8 text-center bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -136,7 +136,7 @@ const Skills = () => {
               aria-labelledby={`${cat.name.toLowerCase()}-tab`}
             >
               <motion.div 
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto w-full max-w-full overflow-x-hidden"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"

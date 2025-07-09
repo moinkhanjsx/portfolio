@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-full overflow-x-hidden ${
         isScrolled
           ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg"
           : "bg-transparent"
@@ -41,7 +41,7 @@ const Navbar = () => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-full overflow-x-hidden mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 w-full">
           {/* Logo */}
           <motion.div

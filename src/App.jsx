@@ -157,19 +157,13 @@ function App() {
         {/* Main Content */}
         <main id="main-content">
           <AnimatePresence mode="wait">
-            <motion.div
-              key="portfolio-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
+            <div key="portfolio-content">
               <Home />
               <About />
               <Projects />
               <Skills />
               <Contact />
-            </motion.div>
+            </div>
           </AnimatePresence>
         </main>
 
