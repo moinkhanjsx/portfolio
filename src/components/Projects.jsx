@@ -5,10 +5,11 @@ import PreviewModal from "./PreviewModal";
 
 const projects = [
   {
-    image: "/vite.svg",
-    title: "Vite Project",
-    description: "A blazing fast Vite-powered app.",
-    link: "https://vitejs.dev/"
+    image: "/bcd.png", // HomeShare screenshot
+    title: "HomeShare Listings",
+    description: "A full-featured property rental and listing platform.",
+    link: "https://homeshare-9joh.onrender.com/listings",
+    tech: "React, Node.js, Express, MongoDB, Tailwind CSS"
   },
   {
     image: "/abc.png", // Blog screenshot
@@ -17,13 +18,6 @@ const projects = [
     link: "https://mega-blog-3ffs.onrender.com",
     github: "", // Add your GitHub repo link if you want
     tech: "React, Vite, Tailwind CSS, Node.js, Express, MongoDB"
-  },
-  {
-    image: "/bcd.png", // HomeShare screenshot
-    title: "HomeShare Listings",
-    description: "A full-featured property rental and listing platform.",
-    link: "https://homeshare-9joh.onrender.com/listings",
-    tech: "React, Node.js, Express, MongoDB, Tailwind CSS"
   }
 ];
 
@@ -75,7 +69,7 @@ const Projects = () => {
         Projects
       </motion.h2>
       <motion.div 
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0 w-full max-w-full overflow-x-hidden"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 px-2 sm:px-0 w-full max-w-4xl mx-auto overflow-x-hidden"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

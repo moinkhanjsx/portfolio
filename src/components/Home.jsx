@@ -4,7 +4,7 @@ import TypingAnimation from "./TypingAnimation";
 import MorphingText from "./MorphingText";
 
 const Home = () => (
-  <section id="home" className="min-h-[60vh] sm:min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 w-full max-w-full overflow-x-hidden px-2 sm:px-0 relative">
+  <section id="home" className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 w-full max-w-full px-2 sm:px-0 relative">
     {/* Animated SVG background */}
     <motion.img 
       src="/vite.svg" 
@@ -28,9 +28,6 @@ const Home = () => (
     <motion.h1 
       id="home-heading"
       className="text-4xl sm:text-6xl font-extrabold mb-3 sm:mb-4 text-center relative z-10 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-lg"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <span className="inline-block min-w-[120px]">
         <TypingAnimation 
@@ -45,9 +42,6 @@ const Home = () => (
     
     <motion.p 
       className="text-lg sm:text-2xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 text-center relative z-10"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
     >
       <span className="inline-block min-w-[220px]">
         <MorphingText 
@@ -63,16 +57,13 @@ const Home = () => (
           className="text-lg sm:text-2xl text-gray-700 dark:text-gray-300 font-semibold"
           duration={2500}
           transitionDuration={0.4}
-          delay={3000}
+          delay={0}
         />
       </span>
     </motion.p>
     
-    <motion.div 
+    <div 
       className="flex flex-col sm:flex-row gap-4 justify-center relative z-10"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
       role="group"
       aria-label="Main action buttons"
     >
@@ -100,14 +91,11 @@ const Home = () => (
         </svg>
         Download Resume
       </motion.a>
-    </motion.div>
+    </div>
     
     {/* Social links */}
-    <motion.div 
+    <div 
       className="flex gap-6 mt-8 relative z-10"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
       role="group"
       aria-label="Social media links"
     >
@@ -154,7 +142,7 @@ const Home = () => (
           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z" />
         </svg>
       </motion.a>
-    </motion.div>
+    </div>
   </section>
 );
 

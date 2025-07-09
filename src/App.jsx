@@ -101,6 +101,18 @@ function App() {
     },
   ];
 
+  // After loading, scroll to anchor if present
+  useEffect(() => {
+    if (!isLoading && window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100); // slight delay to ensure DOM is ready
+      }
+    }
+  }, [isLoading]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-amber-400 to-amber-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
@@ -142,7 +154,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-900">
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
