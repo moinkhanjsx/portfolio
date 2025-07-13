@@ -27,37 +27,36 @@ const Home = () => (
     
     <motion.h1 
       id="home-heading"
-      className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-3 sm:mb-4 text-center relative z-10 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-lg px-2"
+      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6"
     >
-      <span className="inline-block min-w-[120px] sm:min-w-[140px] md:min-w-[160px]">
+      <span className="inline-block min-w-[80px] sm:min-w-[140px] md:min-w-[160px]">
         <TypingAnimation 
-          speed={150} 
+          speed={100} 
           delay={0.5}
-          className="bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 bg-clip-text text-transparent"
+          className="bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent"
         >
-          Moin Khan
+          Hi, I'm Moin
         </TypingAnimation>
       </span>
     </motion.h1>
     
     <motion.p 
-      className="text-base sm:text-lg md:text-2xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 text-center relative z-10 px-2"
+      className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-4xl mx-auto px-4"
     >
-      <span className="inline-block min-w-[200px] sm:min-w-[220px] md:min-w-[240px]">
+      <span className="inline-block min-w-[120px] sm:min-w-[220px] md:min-w-[240px]">
         <MorphingText 
           texts={[
-            "Web Developer",
-            "Frontend Engineer", 
-            "React Specialist",
-            "UI/UX Designer",
             "Full Stack Developer",
+            "React Specialist",
             "Problem Solver",
-            "Creative Coder"
+            "Creative Coder",
+            "Web Enthusiast",
+            "Tech Innovator"
           ]}
-          className="text-base sm:text-lg md:text-2xl text-gray-700 dark:text-gray-300 font-semibold"
-          duration={2500}
-          transitionDuration={0.4}
-          delay={0}
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300"
+          duration={3000}
+          transitionDuration={0.5}
+          delay={2000}
         />
       </span>
     </motion.p>

@@ -34,7 +34,7 @@ const Contact = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <span className="inline-block min-w-[140px] sm:min-w-[160px] md:min-w-[180px]">
+            <span className="inline-block min-w-[80px] sm:min-w-[160px] md:min-w-[180px]">
               <TypingAnimation 
                 speed={100} 
                 delay={0.5}
@@ -45,7 +45,7 @@ const Contact = () => {
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
-            <span className="inline-block min-w-[240px] sm:min-w-[260px] md:min-w-[280px]">
+            <span className="inline-block min-w-[120px] sm:min-w-[260px] md:min-w-[280px]">
               <MorphingText 
                 texts={[
                   "Ready to start a project?",
@@ -75,7 +75,7 @@ const Contact = () => {
           >
             <div className="bg-white dark:bg-gray-700 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                <span className="inline-block min-w-[160px] sm:min-w-[180px] md:min-w-[200px]">
+                <span className="inline-block min-w-[80px] sm:min-w-[180px] md:min-w-[200px]">
                   <MorphingText 
                     texts={[
                       "Contact Information",
@@ -163,7 +163,7 @@ const Contact = () => {
           >
             <div className="bg-white dark:bg-gray-700 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                <span className="inline-block min-w-[160px] sm:min-w-[180px] md:min-w-[200px]">
+                <span className="inline-block min-w-[80px] sm:min-w-[180px] md:min-w-[200px]">
                   <MorphingText 
                     texts={[
                       "Send a Message",
@@ -213,7 +213,7 @@ const Contact = () => {
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    <span className="inline-block min-w-[120px] sm:min-w-[140px] md:min-w-[160px]">
+                    <span className="inline-block min-w-[60px] sm:min-w-[140px] md:min-w-[160px]">
                       <MorphingText 
                         texts={[
                           "Message",

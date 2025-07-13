@@ -15,7 +15,7 @@ const About = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <span className="inline-block min-w-[120px] sm:min-w-[140px] md:min-w-[160px]">
+            <span className="inline-block min-w-[60px] sm:min-w-[140px] md:min-w-[160px]">
               <TypingAnimation 
                 speed={100} 
                 delay={0.5}
@@ -38,7 +38,7 @@ const About = () => {
           >
             <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
               I am a passionate{" "}
-              <span className="inline-block min-w-[140px] sm:min-w-[160px] md:min-w-[180px]">
+              <span className="inline-block min-w-[80px] sm:min-w-[160px] md:min-w-[180px]">
                 <MorphingText 
                   texts={[
                     "web developer",
@@ -55,7 +55,7 @@ const About = () => {
                 />
               </span>
               {" "}with a strong foundation in modern web technologies. I specialize in creating{" "}
-              <span className="inline-block min-w-[100px] sm:min-w-[120px] md:min-w-[140px]">
+              <span className="inline-block min-w-[60px] sm:min-w-[120px] md:min-w-[140px]">
                 <MorphingText 
                   texts={[
                     "beautiful",
@@ -76,7 +76,7 @@ const About = () => {
             
             <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
               With expertise in{" "}
-              <span className="inline-block min-w-[100px] sm:min-w-[120px] md:min-w-[140px]">
+              <span className="inline-block min-w-[60px] sm:min-w-[120px] md:min-w-[140px]">
                 <MorphingText 
                   texts={[
                     "React.js",
@@ -93,7 +93,7 @@ const About = () => {
                 />
               </span>
               , I bring ideas to life through clean, efficient code and{" "}
-              <span className="inline-block min-w-[100px] sm:min-w-[120px] md:min-w-[140px]">
+              <span className="inline-block min-w-[60px] sm:min-w-[120px] md:min-w-[140px]">
                 <MorphingText 
                   texts={[
                     "intuitive",
