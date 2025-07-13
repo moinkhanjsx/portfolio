@@ -11,7 +11,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import FloatingDock from "./components/FloatingDock";
-import FloatingDockToggle from "./components/FloatingDockToggle";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -154,7 +153,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-900 overflow-x-hidden">
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"

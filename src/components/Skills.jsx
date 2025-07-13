@@ -81,7 +81,7 @@ const Skills = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="py-12 sm:py-16 px-2 sm:px-4 w-full max-w-full overflow-x-hidden bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow mb-8"
+      className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-x-hidden bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow mb-8"
       aria-labelledby="skills-heading"
     >
       <motion.h2 
@@ -96,7 +96,7 @@ const Skills = () => {
       </motion.h2>
       {/* Tabs for categories */}
       <motion.div 
-        className="flex justify-center gap-4 mb-8"
+        className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 px-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -107,7 +107,7 @@ const Skills = () => {
         {categories.map((cat) => (
           <motion.button
             key={cat.name}
-            className={`px-5 py-2 rounded-full font-semibold border-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 text-base sm:text-lg
+            className={`px-3 sm:px-5 py-2 rounded-full font-semibold border-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 text-sm sm:text-base lg:text-lg
               ${selectedCategory === cat.name ? 'bg-amber-500 text-white border-amber-500 shadow' : 'bg-white dark:bg-gray-800 text-amber-700 border-amber-300 dark:border-gray-700 hover:bg-amber-100 dark:hover:bg-gray-700'}`}
             onClick={() => setSelectedCategory(cat.name)}
             whileHover={{ scale: 1.05 }}
@@ -136,15 +136,15 @@ const Skills = () => {
               aria-labelledby={`${cat.name.toLowerCase()}-tab`}
             >
               <motion.div 
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto w-full max-w-full overflow-x-hidden"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto w-full max-w-full overflow-x-hidden"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
-                {cat.skills.map((skill, i) => (
+                {cat.skills.map((skill) => (
                   <motion.div
                     key={skill.name}
-                    className={`flex flex-col items-center group relative transition-transform duration-300 ease-out transform bg-white/90 dark:bg-gray-800/80 rounded-xl shadow-lg p-6 hover:shadow-2xl cursor-pointer border border-amber-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2`}
+                    className={`flex flex-col items-center group relative transition-transform duration-300 ease-out transform bg-white/90 dark:bg-gray-800/80 rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-2xl cursor-pointer border border-amber-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2`}
                     onMouseEnter={() => setHovered(skill.name)}
                     onMouseLeave={() => setHovered(null)}
                     tabIndex={0}
@@ -156,14 +156,14 @@ const Skills = () => {
                     aria-label={`${skill.name} skill - ${skill.level}% proficiency`}
                   >
                     <motion.span 
-                      className="text-4xl mb-2 drop-shadow-lg"
+                      className="text-3xl sm:text-4xl mb-2 drop-shadow-lg"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                       aria-hidden="true"
                     >
                       {skill.icon}
                     </motion.span>
-                    <span className="font-semibold mb-2 text-lg flex items-center gap-2">
+                    <span className="font-semibold mb-2 text-base sm:text-lg flex items-center gap-2 text-center">
                       {skill.name}
                       {/* Badge for proficiency */}
                       <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-300">
